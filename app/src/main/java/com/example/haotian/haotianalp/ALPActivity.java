@@ -298,6 +298,7 @@ public class ALPActivity extends Activity implements SensorEventListener {
                 bufferedWriter.newLine();
                 bufferedWriter.close();
                 clearDataBuffer();
+                dataCount++;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -391,8 +392,6 @@ public class ALPActivity extends Activity implements SensorEventListener {
         data.append(", ");
         data.append("Counter");
         data.append(System.lineSeparator());
-
-        dataCount++;
     }
 
     public void createDataString(MotionEvent event, float xVelocity, float yVelocity) {
