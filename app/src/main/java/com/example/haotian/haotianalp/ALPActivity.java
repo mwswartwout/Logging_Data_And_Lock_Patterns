@@ -122,7 +122,7 @@ public class ALPActivity extends Activity implements SensorEventListener {
         path.mkdirs();
         hw2data = new File(path, "hw2Data.csv");
         hw3data = new File(path, "hw3Data.csv");
-        hw4data = new File(path, "hw4Data.csv");
+        hw4data = new File(path, "mattPattern4.csv");
         headerDataString();
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -391,6 +391,8 @@ public class ALPActivity extends Activity implements SensorEventListener {
         data.append(", ");
         data.append("Counter");
         data.append(System.lineSeparator());
+
+        dataCount++;
     }
 
     public void createDataString(MotionEvent event, float xVelocity, float yVelocity) {
@@ -449,8 +451,6 @@ public class ALPActivity extends Activity implements SensorEventListener {
         data.append(", ");
         data.append(dataCount);
         data.append(System.lineSeparator());
-
-        dataCount++;
     }
 
     private void getAccelerometer(SensorEvent event) {
