@@ -25,3 +25,9 @@ proguard/
 
 # Log Files
 *.log
+
+# Other
+*.aux
+*.gz
+*.zip
+Screenshots/
