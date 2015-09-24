@@ -41,58 +41,62 @@ public class PatternGenerator
     public List<Point> getPattern()
     {
 
-        int patternLength = mRng.nextInt(mMaxNodes - mMinNodes) + mMinNodes; //Generate random pattern length between min and max
+//        int patternLength = mRng.nextInt(mMaxNodes - mMinNodes) + mMinNodes; //Generate random pattern length between min and max
         List<Point> pattern = new ArrayList<Point>(); // List contains the lock pattern
-        List<Point> availablePoints = new ArrayList<Point>(mAllNodes); // Points that are not part of the lock pattern yet
-        List<Point> candidatePoints; // Points that could possibly be the next node in the lock pattern
-        ArrayList<Point> toRemove; // Points that can not be the next node in the lock pattern
-
-        int nextNodeNumber = mRng.nextInt(9); //Generates random # [0,9)
-        Point currentNode = availablePoints.get(nextNodeNumber); // Selects randomly chosen node to be next in the lock pattern
-        availablePoints.remove(currentNode); //Remove start node from allNodes list
-        pattern.add(currentNode); //Add start node to pattern list
-        candidatePoints = new ArrayList<Point>(availablePoints); //Start with all remaining nodes as possible candidates for the next step of the pattern
-
-        int dX, dY, gcd, possibleUnusedX, possibleUnusedY; //declare variables used in loop
-
-
-        while (pattern.size() != patternLength) { //Loop until desired pattern size is reached
-            toRemove = new ArrayList<Point>();
-            for (Point candidate : candidatePoints) { //Go through each candidate
-                dX = candidate.x - currentNode.x; //Calculate deltaX and deltaY values for candidate
-                dY = candidate.y - currentNode.y;
-                gcd = computeGcd(dX, dY); //Check if candidate is adjacent or not via gcd
-                for (int j = 1; j < gcd; j++) { //If node isn't adjacent (i.e. gcd > 1), then check for unused nodes in path
-                    possibleUnusedX = currentNode.x + dX/gcd*j; //Calculate the X and Y position of unused node that lays in path between current pattern node and candidate node
-                    possibleUnusedY = currentNode.y + dY/gcd*j;
-                    for (Point find : candidatePoints) { //Check if the node in the calculated X,Y position is in the candidate list
-                        if (find.x == possibleUnusedX && find.y == possibleUnusedY) {
-                            toRemove.add(candidate); //If there is an unused node between the current pattern node and the candidate node, the candidate is not valid
-                        }
-                    }
-                }
-            }
-
-            //Remove points from the candidate list that are not valid choices
-            for (Point remove : toRemove) {
-                candidatePoints.remove(remove);
-            }
-
-            nextNodeNumber = mRng.nextInt(candidatePoints.size()); //Randomly select next node in pattern from candidate list
-            currentNode = candidatePoints.get(nextNodeNumber);
-            availablePoints.remove(currentNode); //Remove next node from allNodes list
-            pattern.add(currentNode); //Add next node to pattern list
-            candidatePoints = new ArrayList<Point>(availablePoints); //Reset candidates list to all nodes that are not in the pattern
-        }
-//        Point first = new Point(0,1);
-//        Point second = new Point(1,2);
-//        Point third = new Point(2,1);
-//        Point fourth = new Point(1,0);
+//        List<Point> availablePoints = new ArrayList<Point>(mAllNodes); // Points that are not part of the lock pattern yet
+//        List<Point> candidatePoints; // Points that could possibly be the next node in the lock pattern
+//        ArrayList<Point> toRemove; // Points that can not be the next node in the lock pattern
 //
-//        pattern.add(first);
-//        pattern.add(second);
-//        pattern.add(third);
-//        pattern.add(fourth);
+//        int nextNodeNumber = mRng.nextInt(9); //Generates random # [0,9)
+//        Point currentNode = availablePoints.get(nextNodeNumber); // Selects randomly chosen node to be next in the lock pattern
+//        availablePoints.remove(currentNode); //Remove start node from allNodes list
+//        pattern.add(currentNode); //Add start node to pattern list
+//        candidatePoints = new ArrayList<Point>(availablePoints); //Start with all remaining nodes as possible candidates for the next step of the pattern
+//
+//        int dX, dY, gcd, possibleUnusedX, possibleUnusedY; //declare variables used in loop
+//
+//
+//        while (pattern.size() != patternLength) { //Loop until desired pattern size is reached
+//            toRemove = new ArrayList<Point>();
+//            for (Point candidate : candidatePoints) { //Go through each candidate
+//                dX = candidate.x - currentNode.x; //Calculate deltaX and deltaY values for candidate
+//                dY = candidate.y - currentNode.y;
+//                gcd = computeGcd(dX, dY); //Check if candidate is adjacent or not via gcd
+//                for (int j = 1; j < gcd; j++) { //If node isn't adjacent (i.e. gcd > 1), then check for unused nodes in path
+//                    possibleUnusedX = currentNode.x + dX/gcd*j; //Calculate the X and Y position of unused node that lays in path between current pattern node and candidate node
+//                    possibleUnusedY = currentNode.y + dY/gcd*j;
+//                    for (Point find : candidatePoints) { //Check if the node in the calculated X,Y position is in the candidate list
+//                        if (find.x == possibleUnusedX && find.y == possibleUnusedY) {
+//                            toRemove.add(candidate); //If there is an unused node between the current pattern node and the candidate node, the candidate is not valid
+//                        }
+//                    }
+//                }
+//            }
+//
+//            //Remove points from the candidate list that are not valid choices
+//            for (Point remove : toRemove) {
+//                candidatePoints.remove(remove);
+//            }
+//
+//            nextNodeNumber = mRng.nextInt(candidatePoints.size()); //Randomly select next node in pattern from candidate list
+//            currentNode = candidatePoints.get(nextNodeNumber);
+//            availablePoints.remove(currentNode); //Remove next node from allNodes list
+//            pattern.add(currentNode); //Add next node to pattern list
+//            candidatePoints = new ArrayList<Point>(availablePoints); //Reset candidates list to all nodes that are not in the pattern
+//        }
+        Point first = new Point(1,0);
+        Point second = new Point(1,1);
+        Point third = new Point(0,2);
+        Point fourth = new Point(0,1);
+        //Point fifth = new Point(1,0);
+        //Point sixth = new Point(0,0);
+
+        pattern.add(first);
+        pattern.add(second);
+        pattern.add(third);
+        pattern.add(fourth);
+        //pattern.add(fifth);
+        //pattern.add(sixth);
 
         return pattern;
     }
